@@ -9,6 +9,7 @@ import javafx.stage.Stage;
 import java.awt.event.ActionEvent;
 
 public class Controller {
+    
     @FXML
     Button f5;
     @FXML
@@ -25,6 +26,7 @@ public class Controller {
     }
     @FXML public void handleF7ButtonClicked(Event evt){
         System.out.println("F7 geklickt");
+        System.exit(0);
         //Function close
     }
 
