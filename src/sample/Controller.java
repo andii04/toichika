@@ -12,7 +12,8 @@ import java.awt.event.ActionEvent;
 public class Controller {
     String JSON = "---------";
     int sqrtgrid = (int) Math.sqrt(JSON.length());
-    GameField pane = new GameField();
+    //GameField pane = new GameField();
+    //GameField[][] field = new GameField[2][5];
 
     @FXML public void initialise(Event evt){
 
