@@ -15,12 +15,18 @@ public class Controller {
     //GameField pane = new GameField();
     //GameField[][] field = new GameField[2][5];
 
+
+
     @FXML public void initialise(Event evt){
 
     }
 
     @FXML public void handleF5ButtonClicked(Event evt){
         System.out.println("F5 geklickt   " +sqrtgrid);
+        int[][] primes = new int[100][10];
+        int rows = primes.length;
+        int cols = primes[0].length;
+        System.out.println(rows);
         //function step
     }
     @FXML public void handleF6ButtonClicked(Event evt){
