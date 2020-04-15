@@ -12,7 +12,7 @@ import java.awt.event.ActionEvent;
 public class Controller {
     String JSON = "---------";
     int sqrtgrid = (int) Math.sqrt(JSON.length());
-    GameField pane = new GameField();
+
 
 
 
@@ -22,11 +22,12 @@ public class Controller {
     }
 
     @FXML public void handleF5ButtonClicked(Event evt){
-        System.out.println("F5 geklickt   " +sqrtgrid);
+        GameField pane = new GameField();
+        //System.out.println("F5 geklickt   " +sqrtgrid);
         int[][] primes = new int[100][10];
         int rows = primes.length;
         int cols = primes[0].length;
-        System.out.println(rows);
+        //System.out.println(rows);
         //function step
     }
     @FXML public void handleF6ButtonClicked(Event evt){
