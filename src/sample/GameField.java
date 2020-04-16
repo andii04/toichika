@@ -12,7 +12,6 @@ public class GameField {
     public int getWidth() {
         return cells.length;
     }
-
     public int getHeight() {
         return cells[0].length;
     }
@@ -28,4 +27,5 @@ public class GameField {
         //cells[0][1].setArrowType(ArrowType.RIGHT);
         //giveCells();
     }
+
 }
