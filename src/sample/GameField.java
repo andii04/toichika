@@ -1,6 +1,5 @@
 package sample;
 
-import com.sun.javafx.geom.Area;
 import javafx.scene.layout.GridPane;
 
 public class GameField {
@@ -29,7 +28,10 @@ public class GameField {
 
 
     private boolean checkIfNoArrowisInArea(int area, Cells cells){
-        //this.area = area;
+        this.area = area;
+        for(int i=0;i<10;i++){
+            System.out.println(i);
+        }
         return true;
     }
 
@@ -37,6 +39,9 @@ public class GameField {
         giveCells();
         //cells[0][1].setArrowType(ArrowType.RIGHT);
         //giveCells();
+        for(int i=0;i<cells.length;i++){
+            cells[0][i].setArrowType(ArrowType.EMPTY);
+        }
     }
 
 }
