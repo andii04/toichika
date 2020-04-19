@@ -30,6 +30,14 @@ public class Cells {
         this.point = point;
     }
 
+    public void setLocation (int pX, int pY) {
+        this.point = new Point(pX, pY);
+    }
+
+    public Point getLocation () {
+        return point;
+    }
+
     public Cells(ArrowType arrowType, Point point,int area) {
         this.arrowType = arrowType;
         this.point = point;
