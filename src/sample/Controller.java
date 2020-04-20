@@ -18,11 +18,14 @@ public class Controller {
     }
 
     @FXML public void handleF5ButtonClicked(Event evt){
-        GameField pane = new GameField();
+        GameField pane = new GameField(10,10);
+        int panewidth = pane.getWidth();
+        int paneheight = pane.getHeight();
         int[][] primes = new int[100][10];
         int rows = primes.length;
         int cols = primes[0].length;
         //System.out.println(rows);
+        System.out.println("high"+paneheight);
     }
     @FXML public void handleF6ButtonClicked(Event evt){
         System.out.println("F6 geklickt");

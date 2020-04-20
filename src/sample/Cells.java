@@ -43,4 +43,8 @@ public class Cells {
         this.point = point;
         this.area = area;
     }
+    public Cells(ArrowType arrowType, Point point) {
+        this.arrowType = arrowType;
+        this.point = point;
+    }
 }

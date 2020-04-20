@@ -2,8 +2,6 @@ package sample;
 
 import javafx.scene.layout.GridPane;
 
-import java.awt.*;
-
 public class GameField {
     int lenght = 10;
     int height = 15;
@@ -18,20 +16,37 @@ public class GameField {
         return cells[0].length;
     }
 
-    private void giveCells(){
+    /*public void removeCell (int pX, int pY) {
+        if (pX >= 0 && pY >= 0 && pY < this.getHeight() && pX < this.getWidth()) {
+            Cells currentCell = cells[pX][pY];
+            if (currentCell != null && !currentCell.isFixed()) {
+                if (currentCell.getArrowType() == ArrowType.EMPTY) {
+                    cells[pX][pY] = null;
+                }
+                else {
+                    //cells[pX][pY] = new Cells(currentCell.getArrowType());
+                    cells[pX][pY].setLocation(pX, pY);
+                }
+            }
+        }
+    }*/
+
+    /*private void giveCells(){
         //cells[0][0].setArrowType(ArrowType.EMPTY);
         //cells[0][1].setArrowType(ArrowType.RIGHT);
         int height = getHeight();
         int width = getWidth();
         System.out.println("Höhe "+height+" Breite "+width);
         System.out.println(cells[0][0]);
-    }
+    }*/
+
     private boolean setCell(int pX,int pY, Cells pCell){
         if(pX >=0 && pY >=0 && pX <this.getWidth() && pY > this.getHeight()){
             pCell.setLocation(pX,pY);
             cells[pX][pY] = pCell;
             if(pCell.getArrowType().equals(null)){
                 pCell.setArrowType(ArrowType.RIGHT);
+                System.out.println(pCell);
             }
             return true;
         }
@@ -51,7 +66,7 @@ public class GameField {
         return true;
     }
 
-    public GameField(int lenght, int height) {
+    public GameField(int height, int lenght) {
        cells = new Cells[lenght][height];
     }
 
