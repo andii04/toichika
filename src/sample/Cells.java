@@ -1,6 +1,5 @@
 package sample;
-//tesssssst
-//test2
+
 public class Cells {
     private ArrowType arrowType;
     private Point point;
