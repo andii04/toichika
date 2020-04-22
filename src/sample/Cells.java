@@ -1,7 +1,5 @@
 package sample;
 
-import java.awt.*;
-
 public class Cells {
     private ArrowType arrowType;
     private Point point;
