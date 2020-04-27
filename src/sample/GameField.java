@@ -59,11 +59,16 @@ public class GameField {
         }
         return false;
     }
-    private boolean checkIfNoArrowisInArea(int area, Cells[][] cells){
-        for(int i=0;i<this.getWidth();i++){
-            System.out.println(i);
+    private boolean checkIfNoArrowisInArea(int pArea, Cells[][] pCells){
+        for (int i = 0; i < pCells.length; i++) {
+            for (int j = 0; j < pCells[0].length; j++) {
+                Cells currentCell = pCells[i][j];
+                if(currentCell.getArrowType().equals(null)){
+                    return true;
+                }
+
+            }
         }
-        return true;
     }
 
     public GameField(int height, int lenght) {
