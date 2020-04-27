@@ -1,13 +1,7 @@
 package sample;
 
-import com.sun.media.jfxmediaimpl.platform.Platform;
 import javafx.event.Event;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.layout.GridPane;
-import javafx.stage.Stage;
-
-import java.awt.event.ActionEvent;
 
 public class Controller {
     String JSON = "---------";

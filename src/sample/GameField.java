@@ -59,8 +59,8 @@ public class GameField {
         }
         return false;
     }
-    private boolean checkIfNoArrowisInArea(int area, Cells cells){
-        for(int i=0;i<10;i++){
+    private boolean checkIfNoArrowisInArea(int area, Cells[][] cells){
+        for(int i=0;i<this.getWidth();i++){
             System.out.println(i);
         }
         return true;
