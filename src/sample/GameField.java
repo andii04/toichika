@@ -31,15 +31,6 @@ public class GameField {
         }
     }*/
 
-    /*private void giveCells(){
-        //cells[0][0].setArrowType(ArrowType.EMPTY);
-        //cells[0][1].setArrowType(ArrowType.RIGHT);
-        int height = getHeight();
-        int width = getWidth();
-        System.out.println("Höhe "+height+" Breite "+width);
-        System.out.println(cells[0][0]);
-    }*/
-
     private boolean setCell(int pX,int pY, Cells pCell){
         if(pX >=0 && pY >=0 && pX <this.getWidth() && pY > this.getHeight()){
             pCell.setLocation(pX,pY);
@@ -59,16 +50,25 @@ public class GameField {
         }
         return false;
     }
-    private boolean checkIfNoArrowisInArea(int pArea, Cells[][] pCells){
-        for (int i = 0; i < pCells.length; i++) {
-            for (int j = 0; j < pCells[0].length; j++) {
-                Cells currentCell = pCells[i][j];
-                if(currentCell.getArrowType().equals(null)){
+    private boolean checkIfArrowIsInArea(int pArea){
+        for (int i = 0; i < cells.length; i++) {
+            for (int j = 0; j < cells[0].length; j++) {
+                Cells currentCell = cells[i][j];
+                if(currentCell.getArrowType() != null && currentCell.getArea() == pArea){
                     return true;
                 }
-
             }
         }
+        return false;
+    }
+
+    private void setArrowInCell(Point p,ArrowType pArrow){
+        cells[p.getX()][p.getY()].setArrowType(pArrow);
+    }
+
+    private boolean checkRow(Point p){
+        Cells cell = cells[p.getX()][p.getY()];
+        return false;
     }
 
     public GameField(int height, int lenght) {
