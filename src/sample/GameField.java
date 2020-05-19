@@ -71,6 +71,11 @@ public class GameField {
         return false;
     }
 
+    private boolean checkColoumn(Point p){
+        Cells cell = cells[p.getX()][p.getY()];
+        return false;
+    }
+
     public GameField(int height, int lenght) {
        cells = new Cells[lenght][height];
     }
