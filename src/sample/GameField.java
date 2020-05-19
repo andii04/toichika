@@ -76,6 +76,19 @@ public class GameField {
         return false;
     }
 
+    //noch nicht nachgeschaut
+    private boolean checkIfNoArrowBetweenInRow(Point p,Point q){
+        Cells cellOne = cells[p.getX()][p.getY()];
+        Cells cellTwo = cells[q.getX()][q.getY()];
+
+        if(cellOne.getArrowType()==ArrowType.RIGHT || cellOne.getArrowType()==ArrowType.LEFT && cellTwo.getArrowType()==ArrowType.LEFT || cellTwo.getArrowType()== ArrowType.RIGHT){
+            for(int i = cellOne.getPoint().getX(); i<cellTwo.getPoint().getX();i++){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public GameField(int height, int lenght) {
        cells = new Cells[lenght][height];
     }
