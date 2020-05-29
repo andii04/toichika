@@ -3,6 +3,8 @@ package sample;
 import javafx.scene.layout.GridPane;
 
 public class GameField {
+    //hier JSON Parsing
+
     int lenght = 10;
     int height = 15;
     String str = "test";
@@ -89,8 +91,13 @@ public class GameField {
         return false;
     }
 
+    private boolean checkIfOtherAreaBetweenArrows(){
+        return false;
+    }
+
     public GameField(int height, int lenght) {
        cells = new Cells[lenght][height];
     }
+
 
 }
