@@ -1,4 +1,4 @@
-package sample;
+package sample.Logic;
 
 public class Cells {
     private ArrowType arrowType;
@@ -28,21 +28,9 @@ public class Cells {
         this.point = point;
     }
 
-    public void setLocation (int pX, int pY) {
-        this.point = new Point(pX, pY);
-    }
-
-    public Point getLocation () {
-        return point;
-    }
-
     public Cells(ArrowType arrowType, Point point,int area) {
         this.arrowType = arrowType;
         this.point = point;
         this.area = area;
-    }
-    public Cells(ArrowType arrowType, Point point) {
-        this.arrowType = arrowType;
-        this.point = point;
     }
 }

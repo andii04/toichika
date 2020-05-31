@@ -1,4 +1,4 @@
-package sample;
+package sample.Logic;
 
 import javafx.scene.layout.GridPane;
 
@@ -18,6 +18,7 @@ public class GameField {
         return cells[0].length;
     }
 
+    //TODO: Removing a Set Cell
     /*public void removeCell (int pX, int pY) {
         if (pX >= 0 && pY >= 0 && pY < this.getHeight() && pX < this.getWidth()) {
             Cells currentCell = cells[pX][pY];
@@ -33,26 +34,15 @@ public class GameField {
         }
     }*/
 
-    private boolean setCell(int pX,int pY, Cells pCell){
-        if(pX >=0 && pY >=0 && pX <this.getWidth() && pY > this.getHeight()){
-            pCell.setLocation(pX,pY);
-            cells[pX][pY] = pCell;
-            if(pCell.getArrowType().equals(null)){
-                pCell.setArrowType(ArrowType.RIGHT);
-                System.out.println(pCell);
-            }
-            return true;
+    private boolean checkIfCellIsNotSet(Point p){
+        if (p.getX() >= 0 && p.getY() >= 0 && p.getY() < this.getHeight() && p.getX() < this.getWidth()) {
+            return cells[p.getX()][p.getY()].getArrowType() == null; //|| !cells[pX][pY].isFixed();
         }
         return false;
     }
 
-    private boolean checkIfCellIsNotSet(int pX,int pY){
-        if (pX >= 0 && pY >= 0 && pY < this.getHeight() && pX < this.getWidth()) {
-            return cells[pX][pY] == null; //|| !cells[pX][pY].isFixed();
-        }
-        return false;
-    }
-    private boolean checkIfArrowIsInArea(int pArea){
+    //rdy
+    private boolean checkIfOneArrowIsInArea(int pArea){
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[0].length; j++) {
                 Cells currentCell = cells[i][j];
@@ -64,26 +54,31 @@ public class GameField {
         return false;
     }
 
-    private void setArrowInCell(Point p,ArrowType pArrow){
+    //rdy
+    private void setArrowInCell(Point p, ArrowType pArrow){
         cells[p.getX()][p.getY()].setArrowType(pArrow);
     }
 
-    private boolean checkRow(Point p){
-        Cells cell = cells[p.getX()][p.getY()];
-        return false;
-    }
-
-    private boolean checkColoumn(Point p){
-        Cells cell = cells[p.getX()][p.getY()];
-        return false;
-    }
-
-    //noch nicht nachgeschaut
-    private boolean checkIfNoArrowBetweenInRow(Point p,Point q){
+    //TODO: check COLOUMN no Arrow between two Arrows
+    private boolean checkIfNoArrowBetweenInColoumn(Point p,Point q){
         Cells cellOne = cells[p.getX()][p.getY()];
         Cells cellTwo = cells[q.getX()][q.getY()];
+        if(cellOne.getArrowType()==ArrowType.UP && cellTwo.getArrowType()==ArrowType.DOWN || cellOne.getArrowType()==ArrowType.DOWN && cellTwo.getArrowType()== ArrowType.UP){
+            for(int i = cellOne.getPoint().getY(); i<cellTwo.getPoint().getY();i++){
+                return true;
+            }
+        }
+        return false;
+    }
 
-        if(cellOne.getArrowType()==ArrowType.RIGHT || cellOne.getArrowType()==ArrowType.LEFT && cellTwo.getArrowType()==ArrowType.LEFT || cellTwo.getArrowType()== ArrowType.RIGHT){
+    //TODO: check ROW no Arrow between tow Arrows //noch nicht nachgeschaut
+    private boolean checkIfNoArrowBetweenInRow(Point p,Point q,Cells c){
+        Cells cellOne = cells[p.getX()][p.getY()];
+        Cells cellTwo = cells[q.getX()][q.getY()];
+        // so besserer Stil ?  Alle Übergabeparameter auf Cells umstellen statt Points ?
+        // Cells three = cells[c.getPoint().getX()][c.getPoint().getY()];
+
+        if(cellOne.getArrowType()==ArrowType.RIGHT && cellTwo.getArrowType()==ArrowType.LEFT || cellOne.getArrowType()==ArrowType.LEFT && cellTwo.getArrowType()== ArrowType.RIGHT){
             for(int i = cellOne.getPoint().getX(); i<cellTwo.getPoint().getX();i++){
                 return true;
             }
@@ -91,13 +86,11 @@ public class GameField {
         return false;
     }
 
-    private boolean checkIfOtherAreaBetweenArrows(){
+    private boolean checkIfOtherAreaBetweenArrows(Point p, Point q){
         return false;
     }
 
     public GameField(int height, int lenght) {
        cells = new Cells[lenght][height];
     }
-
-
 }

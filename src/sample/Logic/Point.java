@@ -1,4 +1,4 @@
-package sample;
+package sample.Logic;
 
 public class Point {
     private int x;

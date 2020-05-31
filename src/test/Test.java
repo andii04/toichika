@@ -1,6 +1,6 @@
 package test;
 
-import sample.GameField;
+import sample.Logic.GameField;
 
 public class Test {
     GameField gameField = new GameField(3,12);

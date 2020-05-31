@@ -1,4 +1,4 @@
-package sample;
+package sample.Logic;
 
 import java.util.ArrayList;
 
@@ -15,5 +15,9 @@ public class Toichika {
                 blackList[x][y] = new ArrayList<>();
             }
         }
+    }
+
+    public void solve(){
+
     }
 }
