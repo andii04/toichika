@@ -61,7 +61,7 @@ public class Drawer {
 
         int value;
 
-        Cell currentCell = cells[pPoint.getX()][pPoint.getY()];
+        Cells currentCell = cells[pPoint.getX()][pPoint.getY()];
 
         if (currentCell == null) {
             value = 0;
@@ -70,10 +70,10 @@ public class Drawer {
             value = currentCell.getValue();
             type = currentCell.getCellType();
 
-            Cell leftN = gameBoard.getLeftNeighbour(pPoint);
-            Cell rN = gameBoard.getRightNeighbour(pPoint);
-            Cell aN = gameBoard.getAboveNeighbour(pPoint);
-            Cell bN = gameBoard.getBelowNeighbour(pPoint);
+            Cells leftN = gameBoard.getLeftNeighbour(pPoint);
+            Cells rN = gameBoard.getRightNeighbour(pPoint);
+            Cells aN = gameBoard.getAboveNeighbour(pPoint);
+            Cells bN = gameBoard.getBelowNeighbour(pPoint);
 
             if (leftN != null && leftN.getValue() == value) {
                 leftBorder = 0;

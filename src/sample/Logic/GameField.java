@@ -72,11 +72,9 @@ public class GameField {
     }
 
     //TODO: check ROW no Arrow between tow Arrows //noch nicht nachgeschaut
-    private boolean checkIfNoArrowBetweenInRow(Point p,Point q,Cells c){
+    private boolean checkIfNoArrowBetweenInRow(Point p,Point q){
         Cells cellOne = cells[p.getX()][p.getY()];
         Cells cellTwo = cells[q.getX()][q.getY()];
-        // so besserer Stil ?  Alle Übergabeparameter auf Cells umstellen statt Points ?
-        // Cells three = cells[c.getPoint().getX()][c.getPoint().getY()];
 
         if(cellOne.getArrowType()==ArrowType.RIGHT && cellTwo.getArrowType()==ArrowType.LEFT || cellOne.getArrowType()==ArrowType.LEFT && cellTwo.getArrowType()== ArrowType.RIGHT){
             for(int i = cellOne.getPoint().getX(); i<cellTwo.getPoint().getX();i++){
