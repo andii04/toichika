@@ -9,6 +9,11 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import sample.Logic.ArrowType;
+import sample.Logic.Cells;
 import sample.Logic.GameField;
 import sample.Logic.Toichika;
 
@@ -31,7 +36,7 @@ public class Controller {
         if (keyEvent.getCode() == KeyCode.F5) {
             System.out.println("Step");
             if (!solved) {
-                solved = Toichika.solve();
+                solved = toichika.solve();
             }
             drawer.drawNextStep();
         }
@@ -41,7 +46,7 @@ public class Controller {
             infoText.setVisible(true);
             if (!toichika.solve()) {
                 Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setContentText("Not solveable!");
+                alert.setContentText("ITs Not solveable!");
                 alert.show();
             }
             drawer.drawInit();
@@ -66,15 +71,15 @@ public class Controller {
             Object obj = new JSONParser().parse(fileReader);
             JSONObject jsonObject = (JSONObject) obj;
 
-            GameBoard gameBoard = generateGameboard(jsonObject);
-            snakePit = new SnakePit(gameBoard);
-            drawer = new Drawer(gridPane, gameBoard.getCells(), gameBoard, snakePit.getSteps());
+            GameField gameField = generateGamefield(jsonObject);
+            toichika = new Toichika(gameField);
+            drawer = new Drawer(gridPane, gameField.getCells(), gameField, toichika.getSteps());
             drawer.drawInit();
             infoText.setVisible(false);
         }
         catch (Exception e){
             infoText.setVisible(true);
-            infoText.setText("Invalid File. Try again with another JSON wile, compatible with the puzzle format " + e);
+            infoText.setText("Invalid File. Try again with another JSON, compatible with the puzzle format " + e);
         }
     }
 
@@ -85,37 +90,45 @@ public class Controller {
         int width = Integer.parseInt((String) jsonObject.get("width"));
         int height = Integer.parseInt((String) jsonObject.get("height"));
         GameField gameField= new GameField(width, height);
-        int maxNumber = Integer.parseInt((String) jsonObject.get("maxNumber"));
-        gameField.setHighestNumber(maxNumber);
+        //int maxNumber = Integer.parseInt((String) jsonObject.get("maxNumber"));
+        //gameField.setHighestNumber(maxNumber);
 
         for (Object cell : cells) {
             JSONObject jsoncell = (JSONObject) cell;
             int x = Integer.parseInt ((String) jsoncell.get("x"));
             int y = Integer.parseInt ((String) jsoncell.get("y"));
             int value = Integer.parseInt((String) (jsoncell.get("value")));
-            CellType type;
+            ArrowType type;
             String sType = (String) jsoncell.get("type");
 
-            if (sType.equals("Circle")) {
-                type = CellType.Circle;
+            if (sType.equals("UP")) {
+                type = ArrowType.UP;
             }
-            else if (sType.equals("Cross")) {
-                type = CellType.Cross;
+            else if (sType.equals("DOWN")) {
+                type = ArrowType.DOWN;
+            }
+            else if(sType.equals("RIGHT")){
+                type = ArrowType.RIGHT;
+            }
+            else if(sType.equals("LEFT")){
+                type = ArrowType.LEFT;
             }
             else {
-                type = CellType.Standard;
+                type = ArrowType.EMPTY;
             }
 
-            gameBoard.setCell(x, y, new Cell(type, value));
+            //schauen
+            gameField.setCell(x, y, new Cells(type, value));
         }
 
-        return gameBoard;
+        return gameField;
     }
 
     @FXML public void initialise(Event evt){
 
     }
 
+    /*kann weg wahrscheinlich
     @FXML public void handleF5ButtonClicked(Event evt){
         GameField pane = new GameField(10,10);
         int panewidth = pane.getWidth();
@@ -136,6 +149,7 @@ public class Controller {
         System.exit(0);
         //Function close
     }
+     */
     private void solveToichika(){
         System.out.println("solved");
     }

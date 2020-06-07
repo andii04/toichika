@@ -7,8 +7,10 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import sample.Logic.ArrowType;
 import sample.Logic.Cells;
 import sample.Logic.GameField;
+import sample.Logic.Point;
 
 import javax.swing.text.Style;
 import java.util.ArrayList;
@@ -21,10 +23,10 @@ public class Drawer {
     private int lastIndex;
 
 
-    public Drawer(GridPane gridPane, Cells[][] cells, GameField gameBoard, ArrayList<Cells> steps) {
+    public Drawer(GridPane gridPane, Cells[][] cells, GameField gameField, ArrayList<Cells> steps) {
         this.gridPane = gridPane;
         this.cells = cells;
-        this.gameBoard = gameBoard;
+        this.gameBoard = gameField;
         this.steps = steps;
     }
 
@@ -57,7 +59,7 @@ public class Drawer {
         int belowBorder = 1;
         int leftBorder = 1;
 
-        CellType type = CellType.Standard;
+        ArrowType type = ArrowType.EMPTY;
 
         int value;
 
@@ -109,10 +111,10 @@ public class Drawer {
 
         StackPane stackPane;
 
-        if (type == CellType.Standard) {
+        if (type == ArrowType.EMPTY) {
             stackPane = new StackPane(tile, text);
         }
-        else if (type == CellType.Circle) {
+        else if (type == ArrowType.RIGHT) {
             Circle circle = new Circle();
             circle.setStroke(Color.BLACK);
             if (coloring) {

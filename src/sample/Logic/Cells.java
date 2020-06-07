@@ -8,6 +8,14 @@ public class Cells {
         return arrowType;
     }
 
+    public void setLocation (int pX, int pY) {
+        this.point = new Point(pX, pY);
+    }
+
+    public Point getLocation () {
+        return point;
+    }
+
     public int getArea() {
         return area;
     }

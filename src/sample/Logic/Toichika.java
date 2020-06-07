@@ -17,7 +17,13 @@ public class Toichika {
         }
     }
 
-    public void solve(){
+    public static boolean solve(){
+        //gogogoTODO
+        return true;
+    }
 
+    public ArrayList<Cells> getSteps() {
+        //TODO: schauen
+        return null;
     }
 }
