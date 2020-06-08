@@ -1,6 +1,5 @@
 package sample.GUI;
 
-import javafx.event.Event;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.input.DragEvent;
@@ -12,10 +11,7 @@ import javafx.scene.text.Text;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
-import sample.Logic.ArrowType;
-import sample.Logic.Cells;
-import sample.Logic.GameField;
-import sample.Logic.Toichika;
+import sample.Logic.*;
 
 import java.io.File;
 import java.io.FileReader;
@@ -90,16 +86,14 @@ public class Controller {
         int width = Integer.parseInt((String) jsonObject.get("width"));
         int height = Integer.parseInt((String) jsonObject.get("height"));
         GameField gameField= new GameField(width, height);
-        //int maxNumber = Integer.parseInt((String) jsonObject.get("maxNumber"));
-        //gameField.setHighestNumber(maxNumber);
 
         for (Object cell : cells) {
             JSONObject jsoncell = (JSONObject) cell;
             int x = Integer.parseInt ((String) jsoncell.get("x"));
             int y = Integer.parseInt ((String) jsoncell.get("y"));
-            int value = Integer.parseInt((String) (jsoncell.get("value")));
+            int area = Integer.parseInt((String) (jsoncell.get("area")));
             ArrowType type;
-            String sType = (String) jsoncell.get("type");
+            String sType = (String) jsoncell.get("ArrowType");
 
             if (sType.equals("UP")) {
                 type = ArrowType.UP;
@@ -116,41 +110,10 @@ public class Controller {
             else {
                 type = ArrowType.EMPTY;
             }
-
-            //schauen
-            gameField.setCell(x, y, new Cells(type, value));
+            gameField.setCell(x, y, new Cells(type,new Point(x,y), area));
         }
 
         return gameField;
     }
 
-    @FXML public void initialise(Event evt){
-
-    }
-
-    /*kann weg wahrscheinlich
-    @FXML public void handleF5ButtonClicked(Event evt){
-        GameField pane = new GameField(10,10);
-        int panewidth = pane.getWidth();
-        int paneheight = pane.getHeight();
-        int[][] primes = new int[100][10];
-        int rows = primes.length;
-        int cols = primes[0].length;
-        //System.out.println(rows);
-        System.out.println("high"+paneheight);
-    }
-    @FXML public void handleF6ButtonClicked(Event evt){
-        System.out.println("F6 geklickt");
-        solveToichika();
-        //function solve
-    }
-    @FXML public void handleF7ButtonClicked(Event evt){
-        System.out.println("F7 geklickt");
-        System.exit(0);
-        //Function close
-    }
-     */
-    private void solveToichika(){
-        System.out.println("solved");
-    }
 }

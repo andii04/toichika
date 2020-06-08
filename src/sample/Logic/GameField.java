@@ -3,11 +3,8 @@ package sample.Logic;
 import javafx.scene.layout.GridPane;
 
 public class GameField {
-    //hier JSON Parsing
-
     int lenght = 10;
     int height = 15;
-    String str = "test";
     GridPane grid;
     private Cells[][] cells;
 
@@ -43,15 +40,20 @@ public class GameField {
 
     //rdy
     private boolean checkIfOneArrowIsInArea(int pArea){
+        return 1 == countArrowsInArea(pArea);
+    }
+    //rdy
+    private int countArrowsInArea(int pArea){
+        int counter = 0;
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[0].length; j++) {
                 Cells currentCell = cells[i][j];
-                if(currentCell.getArrowType() != null && currentCell.getArea() == pArea){
-                    return true;
+                if(currentCell.getArrowType() != null && currentCell.getArrowType() != ArrowType.EMPTY && currentCell.getArea() == pArea){
+                    counter++;
                 }
             }
         }
-        return false;
+        return counter;
     }
 
     //rdy
@@ -145,7 +147,7 @@ public class GameField {
     //TODO nachschauen was des is
     public boolean setCell (int pX, int pY, Cells pCell) {
         if (pX >= 0 && pY >= 0 && pY < this.getHeight() && pX < this.getWidth()) {
-            pCell.setPoint(pX, pY);
+            pCell.setPoint(new Point(pX, pY));
             cells[pX][pY] = pCell;
             if (pCell.getValue() > 1) {
                 pCell.setFixed(true);
