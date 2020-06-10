@@ -2,6 +2,8 @@ package sample.Logic;
 
 import javafx.scene.layout.GridPane;
 
+import java.util.ArrayList;
+
 public class GameField {
     int lenght = 10;
     int height = 15;
@@ -61,7 +63,69 @@ public class GameField {
         cells[p.getX()][p.getY()].setArrowType(pArrow);
     }
 
-    //TODO: check COLOUMN no Arrow between two Arrows
+    private boolean checkIfTwoArrowsInRowAndLookEachOther(Point p){
+        Cells currentcell;
+        int counter = 0;
+        ArrayList<Cells> celllistInRow = new ArrayList<>();
+        for(int i = 0; i< cells.length;i++){
+            currentcell = cells[i][p.getY()];
+            if(currentcell.getArrowType().equals("LEFT") || currentcell.getArrowType().equals("RIGHT")){
+                celllistInRow.add(currentcell);
+                counter++;
+            }
+        }
+        if(counter == 2 )
+        {
+            Cells cellFirst = celllistInRow.get(0);
+            Cells cellSecond = celllistInRow.get(1);
+            if(cellFirst.getPoint().getY() < cellSecond.getPoint().getY() && cellFirst.getArrowType().equals("RIGHT") && cellSecond.getArrowType().equals("LEFT")){
+                return true;
+            }
+            else if(cellFirst.getPoint().getY() < cellSecond.getPoint().getY() && cellFirst.getArrowType().equals("LEFT") && cellSecond.getArrowType().equals("RIGHT")){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
+    }
+
+    private boolean checkIfTwoArrowsInColoumnAndLookEachOther(Point p){
+        Cells currentcell;
+        int counter = 0;
+        ArrayList<Cells> celllistInColoumn = new ArrayList<>();
+
+        //kontrollieren ob cells.length passt
+        for(int i = 0; i< cells[p.getX()].length;i++){
+            currentcell = cells[p.getX()][i];
+            if(currentcell.getArrowType().equals("UP") || currentcell.getArrowType().equals("DOWN")){
+                celllistInColoumn.add(currentcell);
+                counter++;
+            }
+        }
+        if(counter == 2)
+        {
+            Cells cellFirst = celllistInColoumn.get(0);
+            Cells cellSecond = celllistInColoumn.get(1);
+            if(cellFirst.getPoint().getX() < cellSecond.getPoint().getX() && cellFirst.getArrowType().equals("DOWN") && cellSecond.getArrowType().equals("UP")){
+                return true;
+            }
+            else if(cellFirst.getPoint().getX() < cellSecond.getPoint().getX() && cellFirst.getArrowType().equals("UP") && cellSecond.getArrowType().equals("DOWN")){
+                return true;
+            }
+            else{
+                return false;
+            }
+        }
+        else{
+            return false;
+        }
+    }
+
+    //TODO: ANPASSEN mit FUNKTIONEN oberhalb check COLOUMN no Arrow between two Arrows
     private boolean checkIfNoArrowBetweenInColoumn(Point p,Point q){
         Cells cellOne = cells[p.getX()][p.getY()];
         Cells cellTwo = cells[q.getX()][q.getY()];
@@ -72,12 +136,10 @@ public class GameField {
         }
         return false;
     }
-
     //TODO: check ROW no Arrow between tow Arrows //noch nicht nachgeschaut
     private boolean checkIfNoArrowBetweenInRow(Point p,Point q){
         Cells cellOne = cells[p.getX()][p.getY()];
         Cells cellTwo = cells[q.getX()][q.getY()];
-
         if(cellOne.getArrowType()==ArrowType.RIGHT && cellTwo.getArrowType()==ArrowType.LEFT || cellOne.getArrowType()==ArrowType.LEFT && cellTwo.getArrowType()== ArrowType.RIGHT){
             for(int i = cellOne.getPoint().getX(); i<cellTwo.getPoint().getX();i++){
                 return true;
