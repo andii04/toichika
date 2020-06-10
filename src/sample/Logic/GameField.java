@@ -17,6 +17,14 @@ public class GameField {
         return cells[0].length;
     }
 
+    public void printGameField(){
+        for(int i = 0;i<cells.length;i++){
+            for(int k = 0;k<cells[i].length;k++){
+                System.out.print(cells[i][k].getArrowType().toString()+" ");
+            }
+            System.out.println();
+        }
+    }
     //TODO: Removing a Set Cell
     /*public void removeCell (int pX, int pY) {
         if (pX >= 0 && pY >= 0 && pY < this.getHeight() && pX < this.getWidth()) {
@@ -33,7 +41,7 @@ public class GameField {
         }
     }*/
 
-    private boolean checkIfCellIsNotSet(Point p){
+    public boolean checkIfCellIsNotSet(Point p){
         if (p.getX() >= 0 && p.getY() >= 0 && p.getY() < this.getHeight() && p.getX() < this.getWidth()) {
             return cells[p.getX()][p.getY()].getArrowType() == null; //|| !cells[pX][pY].isFixed();
         }
@@ -41,11 +49,11 @@ public class GameField {
     }
 
     //rdy
-    private boolean checkIfOneArrowIsInArea(int pArea){
+    public boolean checkIfOneArrowIsInArea(int pArea){
         return 1 == countArrowsInArea(pArea);
     }
     //rdy
-    private int countArrowsInArea(int pArea){
+    public int countArrowsInArea(int pArea){
         int counter = 0;
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[0].length; j++) {
@@ -58,12 +66,25 @@ public class GameField {
         return counter;
     }
 
+    public int getHighestArea(){
+        int highest = 0;
+        for(int i = 0;i<cells.length;i++){
+            for(int k = 0;k<cells[i].length;k++){
+                int area = cells[i][k].getArea();
+                if(area>highest){
+                    highest = area;
+                }
+            }
+        }
+        return highest;
+    }
+
     //rdy
-    private void setArrowInCell(Point p, ArrowType pArrow){
+    public void setArrowInCell(Point p, ArrowType pArrow){
         cells[p.getX()][p.getY()].setArrowType(pArrow);
     }
 
-    private boolean checkIfTwoArrowsInRowAndLookEachOther(Point p){
+    public boolean checkIfTwoArrowsInRowAndLookEachOther(Point p){
         Cells currentcell;
         int counter = 0;
         ArrayList<Cells> celllistInRow = new ArrayList<>();
@@ -93,7 +114,7 @@ public class GameField {
         }
     }
 
-    private boolean checkIfTwoArrowsInColoumnAndLookEachOther(Point p){
+    public boolean checkIfTwoArrowsInColoumnAndLookEachOther(Point p){
         Cells currentcell;
         int counter = 0;
         ArrayList<Cells> celllistInColoumn = new ArrayList<>();
@@ -126,7 +147,7 @@ public class GameField {
     }
 
     //TODO: ANPASSEN mit FUNKTIONEN oberhalb check COLOUMN no Arrow between two Arrows
-    private boolean checkIfNoArrowBetweenInColoumn(Point p,Point q){
+    public boolean checkIfNoArrowBetweenInColoumn(Point p,Point q){
         Cells cellOne = cells[p.getX()][p.getY()];
         Cells cellTwo = cells[q.getX()][q.getY()];
         if(cellOne.getArrowType() == ArrowType.UP && cellTwo.getArrowType() == ArrowType.DOWN || cellOne.getArrowType() == ArrowType.DOWN && cellTwo.getArrowType() == ArrowType.UP){
@@ -137,7 +158,7 @@ public class GameField {
         return false;
     }
     //TODO: check ROW no Arrow between tow Arrows //noch nicht nachgeschaut
-    private boolean checkIfNoArrowBetweenInRow(Point p,Point q){
+    public boolean checkIfNoArrowBetweenInRow(Point p,Point q){
         Cells cellOne = cells[p.getX()][p.getY()];
         Cells cellTwo = cells[q.getX()][q.getY()];
         if(cellOne.getArrowType()==ArrowType.RIGHT && cellTwo.getArrowType()==ArrowType.LEFT || cellOne.getArrowType()==ArrowType.LEFT && cellTwo.getArrowType()== ArrowType.RIGHT){
@@ -148,7 +169,7 @@ public class GameField {
         return false;
     }
     //TODO: kontrollieren
-    private boolean checkIfOtherAreaBetweenArrows(Point p, Point q){
+    public boolean checkIfOtherAreaBetweenArrows(Point p, Point q){
         //Cells and their Areas
         Cells cellOne = cells[p.getX()][p.getY()];
         Cells cellTwo = cells[q.getX()][q.getY()];
@@ -206,16 +227,7 @@ public class GameField {
         return cells;
     }
 
-    //TODO nachschauen was des is
-    public boolean setCell (int pX, int pY, Cells pCell) {
-        if (pX >= 0 && pY >= 0 && pY < this.getHeight() && pX < this.getWidth()) {
-            pCell.setPoint(new Point(pX, pY));
-            cells[pX][pY] = pCell;
-            if (pCell.getValue() > 1) {
-                pCell.setFixed(true);
-            }
-            return true;
-        }
-        return false;
+    public void setCell(int x, int y, Cells cells) {
+        this.cells[x][y] = cells;
     }
 }

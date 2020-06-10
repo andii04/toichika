@@ -3,22 +3,34 @@ package sample.Logic;
 import java.util.ArrayList;
 
 public class Toichika {
-    private GameField gameField;
-    private ArrayList<Integer>[][] blackList;
-    private ArrayList<Cells> steps = new ArrayList<>();
 
-    public Toichika(GameField gameField) {
-        this.gameField = gameField;
-        blackList = new ArrayList[gameField.getWidth()][gameField.getHeight()];
-        for (int x = 0; x < gameField.getWidth(); x++) {
-            for (int y = 0; y < gameField.getHeight(); y++) {
-                blackList[x][y] = new ArrayList<>();
-            }
+
+    public GameField nextStep(GameField gameField, Point p) {
+        if (checkFinished(gameField)) {
+            System.out.println("solution found");
+            return gameField;
         }
+
+        //Evaluation of next steps
+
+
+        return null;
+    }
+
+    private boolean checkFinished(GameField gameField) {
+        int highArea = gameField.getHighestArea();
+        for(int i=0;i<highArea;i++){
+            if(!gameField.checkIfOneArrowIsInArea(i)){
+                return false;
+            }
+
+        }
+        //wenn ned neue for schleifen
+        return true;
     }
 
     public static boolean solve(){
-        //gogogoTODO
+
         return true;
     }
 
