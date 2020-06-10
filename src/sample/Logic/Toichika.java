@@ -1,5 +1,5 @@
 package sample.Logic;
-
+//KOOOOOOOOOPPPPPPPIIIIIIIIIIIEEEE
 import java.util.ArrayList;
 
 public class Toichika {
