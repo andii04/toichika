@@ -66,6 +66,7 @@ public class GameField {
         return counter;
     }
 
+    //rdy
     public int getHighestArea(){
         int highest = 0;
         for(int i = 0;i<cells.length;i++){

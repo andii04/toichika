@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class Toichika {
 
-
+    //TODO: STeps zuerst machen
     public GameField nextStep(GameField gameField, Point p) {
         if (checkFinished(gameField)) {
             System.out.println("solution found");
@@ -25,7 +25,7 @@ public class Toichika {
             }
 
         }
-        //wenn ned neue for schleifen
+        //wenn ned neue for schleifen immer wieder
         return true;
     }
 
