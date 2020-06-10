@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class Drawer {
     private GridPane gridPane;
     private Cells[][] cells;
-    private GameField gameBoard;
+    private GameField gameField;
     private ArrayList<Cells> steps;
     private int lastIndex;
 
@@ -26,7 +26,7 @@ public class Drawer {
     public Drawer(GridPane gridPane, Cells[][] cells, GameField gameField, ArrayList<Cells> steps) {
         this.gridPane = gridPane;
         this.cells = cells;
-        this.gameBoard = gameField;
+        this.gameField = gameField;
         this.steps = steps;
     }
 
@@ -45,8 +45,8 @@ public class Drawer {
     public void drawInit() {
         gridPane.getChildren().clear();
         lastIndex = steps.size();
-        for (int x = 0; x < gameBoard.getWidth(); x++) {
-            for (int y = 0; y < gameBoard.getHeight(); y++) {
+        for (int x = 0; x < gameField.getWidth(); x++) {
+            for (int y = 0; y < gameField.getHeight(); y++) {
                 drawCell(new Point (x,y), true);
             }
         }
@@ -72,10 +72,10 @@ public class Drawer {
             value = currentCell.getValue();
             type = currentCell.getCellType();
 
-            Cells leftN = gameBoard.getLeftNeighbour(pPoint);
-            Cells rN = gameBoard.getRightNeighbour(pPoint);
-            Cells aN = gameBoard.getAboveNeighbour(pPoint);
-            Cells bN = gameBoard.getBelowNeighbour(pPoint);
+            Cells leftN = gameField.getLeftNeighbour(pPoint);
+            Cells rN = gameField.getRightNeighbour(pPoint);
+            Cells aN = gameField.getAboveNeighbour(pPoint);
+            Cells bN = gameField.getBelowNeighbour(pPoint);
 
             if (leftN != null && leftN.getValue() == value) {
                 leftBorder = 0;
