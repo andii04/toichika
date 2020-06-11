@@ -24,6 +24,12 @@ public class Toichika {
                 return false;
             }
         }
+
+        /*for(int i=0;i<gameField.lenght;i++) {
+            for (int k = 0; k < gameField.height; k++) {
+            //if(gameField.checkIfTwoArrowsInRowAndLookEachOther())
+            //}
+        }*/
         //wenn ned neue for schleifen immer wieder
         return true;
     }

@@ -23,7 +23,7 @@ public class Main extends Application {
         primaryStage.show();
 
         GameField gf = null;
-        File file = new File("C:\\Users\\Andreas W\\Desktop\\toichika - Kopie\\src\\sample\\gameField01.json");
+        File file = new File("src/sample/gameField01.json");
         try {
             Controller con = new Controller();
             gf = con.generateGamefield(readJSONFile(file));
