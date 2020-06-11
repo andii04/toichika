@@ -6,7 +6,7 @@
       "x":"0",
       "y": "0",
       "area": "0",
-      "ArrowType":"RIGHT"
+      "ArrowType":""
     },
     {
       "x":"0",
@@ -185,7 +185,7 @@
       "x":"3",
       "y": "0",
       "area": "9",
-      "ArrowType":"RIGHT"
+      "ArrowType":""
     },
     {
       "x":"3",
@@ -245,7 +245,7 @@
       "x":"4",
       "y": "0",
       "area": "9",
-      "ArrowType":"RIGHT"
+      "ArrowType":""
     },
     {
       "x":"4",
@@ -305,7 +305,7 @@
       "x":"5",
       "y": "0",
       "area": "16",
-      "ArrowType":"RIGHT"
+      "ArrowType":""
     },
     {
       "x":"5",
@@ -485,7 +485,7 @@
       "x":"8",
       "y": "0",
       "area": "26",
-      "ArrowType":"RIGHT"
+      "ArrowType":""
     },
     {
       "x":"8",

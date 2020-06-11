@@ -23,7 +23,6 @@ public class Toichika {
             if(!gameField.checkIfOneArrowIsInArea(i)){
                 return false;
             }
-
         }
         //wenn ned neue for schleifen immer wieder
         return true;

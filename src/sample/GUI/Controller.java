@@ -10,6 +10,8 @@ public class Controller {
     private Toichika toichika;
     private boolean solved;
 
+
+    //JSON parsing
     public GameField generateGamefield(JSONObject jsonObject){
         solved = false;
         JSONArray cells = (JSONArray) jsonObject.get("cells");
