@@ -1,5 +1,5 @@
 package sample.Logic;
 
 public enum ArrowType {
-    UP,DOWN,RIGHT,LEFT,EMPTY
+    UP, DOWN, RIGHT, LEFT, EMPTY
 }

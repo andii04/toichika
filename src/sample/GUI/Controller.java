@@ -1,6 +1,8 @@
 package sample.GUI;
 
 
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import org.json.JSONArray;
 import org.json.JSONObject;
 import sample.Logic.*;
@@ -9,6 +11,32 @@ public class Controller {
     private Drawer drawer;
     private Toichika toichika;
     private boolean solved;
+
+    public void handleOnKeyPressed(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.F5) {
+            System.out.println("Step");
+            /*if (!solved) {
+                solved = toichika.solve();
+            }
+            drawer.drawNextStep();*/
+        }
+        else if (keyEvent.getCode() == KeyCode.F6) {
+            System.out.println("Solve");
+            /*infoText.setText("Solving...");
+            infoText.setVisible(true);
+            if (!toichika.solve()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("ITs Not solveable!");
+                alert.show();
+            }
+            drawer.drawInit();
+            infoText.setVisible(false);*/
+        }
+        else if (keyEvent.getCode() == KeyCode.F8) {
+            System.out.println("Close");
+            System.exit(0);
+        }
+    }
 
 
     //JSON parsing
