@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import org.json.JSONException;
 import org.json.JSONObject;
 import sample.Logic.GameField;
+import sample.Logic.Toichika;
 
 import java.io.File;
 import java.io.IOException;
@@ -24,9 +25,10 @@ public class Main extends Application {
 
         GameField gf = null;
         File file = new File("src/sample/gameField01.json");
+        File solvedfile = new File("src/sample/gameField02_geloest.json");
         try {
             Controller con = new Controller();
-            gf = con.generateGamefield(readJSONFile(file));
+            gf = con.generateGamefield(readJSONFile(solvedfile));
 
         }
         catch (Exception e){
@@ -34,6 +36,9 @@ public class Main extends Application {
         }
 
         gf.printGameField();
+
+        Toichika toichika = new Toichika();
+        toichika.nextStep(gf);
     }
 
 
