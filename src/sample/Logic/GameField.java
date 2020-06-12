@@ -124,7 +124,7 @@ public class GameField {
                 counter++;
             }
         }
-        for (int k = 0; k < cells[x].length; k += 2) {
+        for (int k = 0; k < celllistInColoumn.size()-1; k += 2) {
             Cells cellFirst = celllistInColoumn.get(k);
             Cells cellSecond = celllistInColoumn.get(k + 1);
             if (cellFirst.getPoint().getX() < cellSecond.getPoint().getX() && cellFirst.getArrowType().equals("DOWN") && cellSecond.getArrowType().equals("UP")) {
