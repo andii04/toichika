@@ -229,8 +229,17 @@ public class GameField {
         return cells;
     }
 
-    public void setCell(int x, int y, Cells cells) {
-        this.cells[x][y] = cells;
+    public boolean setCell(int x, int y, Cells pCells) {
+        if (x >= 0 && y >= 0 && y < this.getHeight() && x < this.getWidth()) {
+            pCells.setLocation(x, y);
+            cells[x][y] = pCells;
+            if (pCells.getArrowType().equals(ArrowType.EMPTY)) {
+                pCells.setFixxed(true);
+            }
+            return true;
+        }
+        return false;
+        //this.cells[x][y] = cells;
     }
 
     private boolean isBorderOnLeft (Point pPoint) {

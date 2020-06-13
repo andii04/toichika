@@ -46,6 +46,7 @@ public class Controller {
             JSONObject jsonObject = (JSONObject) obj;
             GameField gameField = generateGamefield(jsonObject);
             toichika = new Toichika(gameField);
+            toichika.solve();
             /*for(int x = 0; x<gameField.getWidth();x++){
                 for(int y = 0;y < gameField.getHeight();y++){
                     cells[x][y].setArrowType(jsonObject.get());

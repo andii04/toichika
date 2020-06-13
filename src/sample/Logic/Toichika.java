@@ -3,10 +3,13 @@ package sample.Logic;
 import java.util.ArrayList;
 
 public class Toichika {
+    private Cells[][]cells;
     private GameField gameField;
     private ArrayList[][] blackList;
-    private ArrayList<Cells> steps = new ArrayList<>();
+    private ArrayList<Cells> listWithArrows = new ArrayList<Cells>();
+    private ArrayList<Cells> steps = new ArrayList<Cells>();
     public Toichika(GameField gameField) {
+        cells = gameField.getCells();
         this.gameField = gameField;
         blackList = new ArrayList[gameField.getWidth()][gameField.getHeight()];
         for(int x = 0; x < gameField.getWidth();x++){
@@ -33,9 +36,11 @@ public class Toichika {
     private Point getNextPoint(Point p) {
         Point nextPoint = null;
         if (p == null) {
+            //startcell left top
             nextPoint = new Point (0, 0);
         }
         else {
+            //going one cell right in same row
             nextPoint = new Point (p.getX() + 1, p.getY());
         }
 
@@ -96,38 +101,21 @@ public class Toichika {
         return true;
     }
     public boolean solve() {
-        Point currentPoint = getNextPoint(null);
-        Cells newCell;
-        while (currentPoint != null) {
-            for (int i = 0; i<= gameField.getWidth() ; i++) {
-                if (!blackList[currentPoint.getX()][currentPoint.getY()].contains(i)) {
-                    if (gameField.setCellValueAndCheck(currentPoint.getX(), currentPoint.getY(), i,ArrowType.EMPTY)) {
-                        newCell = new Cells(ArrowType.EMPTY,new Point(i,3),0);
-                        newCell.setLocation(currentPoint.getX(), currentPoint.getY());
-                        steps.add(newCell);
-                        currentPoint = getNextPoint(currentPoint);
-                        break;
-                    }
-                    else if (2 == i) {
-                        currentPoint = getStepBefore(currentPoint);
-                        if (currentPoint == null) {
-                            return false;
-                        }
-                        break;
-                    }
-                    else {
-                        blackList[currentPoint.getX()][currentPoint.getY()].add(i);
-                    }
-                }
-                else if (i == 2) {
-                    currentPoint = getStepBefore(currentPoint);
-                    if (currentPoint == null) {
-                        return false;
-                    }
-                    break;
+        //All areas
+        for(int x= 0; x<gameField.getWidth();x++){
+            for(int y = 0; y < gameField.getHeight();y++ ){
+                if(cells[x][y].getArrowType() != null){
+                    listWithArrows.add(cells[x][y]);
                 }
             }
         }
+        for(int i = 0; i < gameField.getHighestArea();i++){
+            Cells cells = listWithArrows.get(0);
+            ArrowType arrowType = cells.getArrowType();
+            int area = cells.getArea();
+        }
+        System.out.println(listWithArrows.toString());
+
         return true;
     }
     public ArrayList<Cells> getSteps() {
