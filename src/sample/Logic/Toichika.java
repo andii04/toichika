@@ -103,6 +103,8 @@ public class Toichika {
         return true;
     }
     public boolean solve() {
+        ArrowType arrowType = ArrowType.EMPTY;
+        int area =0;
         int counter = 0;
         //All arrows
         for(int x= 0; x<gameField.getWidth();x++){
@@ -120,8 +122,8 @@ public class Toichika {
         for(int i = 0; i < listWithArrows.size();i++){
             System.out.println("i:    "+i);
             Cells cells = listWithArrows.get(i);
-            int area = cells.getArea();
-            ArrowType arrowType = cells.getArrowType();
+            area = cells.getArea();
+            arrowType = cells.getArrowType();
             if(arrowType.equals(ArrowType.UP) || arrowType.equals(ArrowType.RIGHT) || arrowType.equals(ArrowType.DOWN) || arrowType.equals(ArrowType.LEFT)){
                 if(!(fixAreas.contains(area))){
                     fixAreas.add(area);
@@ -141,17 +143,14 @@ public class Toichika {
                 System.out.println("dont contains k");
             }
         }
-
-        return true;
-        //Test
-        /*Point currentPoint = getNextPoint(null);
+        Point currentPoint = getNextPoint(null);
         int highestArea = gameField.getHighestArea();
         Cells newCell;
         while (currentPoint != null) {
-            for (int i = highestArea; i>= 2; i--) {
+            for (int i = 0; i<highestArea; i++) {
                 if (!blackList[currentPoint.getX()][currentPoint.getY()].contains(i)) {
-                    if (gameField.setCellValueAndCheck(currentPoint.getX(), currentPoint.getY(), i)) {
-                        newCell = new Cells(i);
+                    if (gameField.setCellValueAndCheck(currentPoint.getX(), currentPoint.getY(), arrowType)) {
+                        newCell = new Cells(arrowType,new Point(currentPoint.getX(),currentPoint.getY()),area);
                         newCell.setLocation(currentPoint.getX(), currentPoint.getY());
                         steps.add(newCell);
                         currentPoint = getNextPoint(currentPoint);
@@ -176,9 +175,8 @@ public class Toichika {
                     break;
                 }
             }
-        }*/
-
-        //return true;
+        }
+        return true;
     }
     public ArrayList<Cells> getSteps() {
         return steps;

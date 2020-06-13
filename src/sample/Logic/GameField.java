@@ -257,9 +257,10 @@ public class GameField {
         return !(pPoint.getY()+1 < getHeight());
     }
     //set cellvalue and check
-    public boolean setCellValueAndCheck(int x, int y, int area, ArrowType atype) {
+    public boolean setCellValueAndCheck(int x, int y, ArrowType atype) {
         if (x >= 0 && y >= 0 && y < this.getHeight() && x < this.getWidth()) {
             Cells prevCell = cells[x][y];
+            int area = cells[x][y].getArea();
             Cells newCell;
             if (prevCell == null) {
                 newCell = new Cells(atype,new Point(x,y),area);
