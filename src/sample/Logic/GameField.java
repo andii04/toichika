@@ -57,6 +57,10 @@ public class GameField {
     public boolean checkIfOneArrowIsInArea(int pArea) {
         return 1 == countArrowsInArea(pArea);
     }
+    //get Area From Point
+    public int getAreaCode(Point p){
+        return cells[p.getX()][p.getY()].getArea();
+    }
     // Final Check to Count all Arrows in one Area
     public int countArrowsInArea(int pArea) {
         int counter = 0;
@@ -243,6 +247,9 @@ public class GameField {
     //check if Border is on Left Side
     private boolean isBorderOnLeft (Point pPoint) {
         return !(pPoint.getX() - 1 >= 0);
+    }
+    public void setArrow(Point p,ArrowType atype){
+        cells[p.getX()][p.getY()].setArrowType(atype);
     }
     //check if Border is on Right Side
     private boolean isBorderOnRight (Point pPoint) {

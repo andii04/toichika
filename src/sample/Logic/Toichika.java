@@ -71,12 +71,69 @@ public class Toichika {
         return true;
     }*/
     //TODO: STeps zuerst machen
-    public GameField nextStep(GameField gameField) {
+    public GameField nextStep(GameField gameField, int index) {
         if (checkFinished(gameField)) {
             System.out.println("solution found");
             return gameField;
         }
         //Evaluation of next steps
+        Cells cell = listWithArrows.get(index);
+        ArrowType type = cell.getArrowType();
+        switch (type){
+            case UP:
+                for(int i= cell.getPoint().getY()-2; i>=0;i--){
+                    if(cell.getArrowType().equals(ArrowType.DOWN) || cell.getArrowType().equals(ArrowType.UP) || cell.getArrowType().equals(ArrowType.RIGHT) || cell.getArrowType().equals(ArrowType.LEFT)){
+                        return null;
+                    }
+                    int areaCode = gameField.getAreaCode(new Point(cell.getPoint().getX(),i));
+                    boolean IsOneArrowInArea = gameField.checkIfOneArrowIsInArea(areaCode);
+                    if(!IsOneArrowInArea){
+                        gameField.setArrowInCell(new Point(cell.getPoint().getX(),i),ArrowType.DOWN);
+                        nextStep(gameField,index+1);
+                    }
+                }
+                return null;
+            case RIGHT:
+                for(int i= cell.getPoint().getX()+2; i<gameField.getWidth();i++){
+                    if(cell.getArrowType().equals(ArrowType.DOWN) || cell.getArrowType().equals(ArrowType.UP) || cell.getArrowType().equals(ArrowType.RIGHT) || cell.getArrowType().equals(ArrowType.LEFT)){
+                        return null;
+                    }
+                    int areaCode = gameField.getAreaCode(new Point(i,cell.getPoint().getY()));
+                    boolean IsOneArrowInArea = gameField.checkIfOneArrowIsInArea(areaCode);
+                    if(!IsOneArrowInArea){
+                        gameField.setArrowInCell(new Point(i,cell.getPoint().getY()),ArrowType.LEFT);
+                        nextStep(gameField,index+1);
+                    }
+                }
+                return null;
+            case LEFT:
+                for(int i= cell.getPoint().getX()-2; i>=0; i--){
+                    if(cell.getArrowType().equals(ArrowType.DOWN) || cell.getArrowType().equals(ArrowType.UP) || cell.getArrowType().equals(ArrowType.RIGHT) || cell.getArrowType().equals(ArrowType.LEFT)){
+                        return null;
+                    }
+                    int areaCode = gameField.getAreaCode(new Point(i,cell.getPoint().getY()));
+                    boolean IsOneArrowInArea = gameField.checkIfOneArrowIsInArea(areaCode);
+                    if(!IsOneArrowInArea){
+                        gameField.setArrowInCell(new Point(i,cell.getPoint().getY()),ArrowType.RIGHT);
+                        nextStep(gameField,index+1);
+                    }
+                }
+                return null;
+            case DOWN:
+                for(int i= cell.getPoint().getY()+2; i<gameField.getHeight();i++){
+                    if(cell.getArrowType().equals(ArrowType.DOWN) || cell.getArrowType().equals(ArrowType.UP) || cell.getArrowType().equals(ArrowType.RIGHT) || cell.getArrowType().equals(ArrowType.LEFT)){
+                        return null;
+                    }
+                    int areaCode = gameField.getAreaCode(new Point(cell.getPoint().getX(),i));
+                    boolean IsOneArrowInArea = gameField.checkIfOneArrowIsInArea(areaCode);
+                    if(!IsOneArrowInArea){
+                        gameField.setArrowInCell(new Point(cell.getPoint().getX(),i),ArrowType.UP);
+                        nextStep(gameField,index+1);
+                    }
+                }
+                return null;
+        }
+
         return null;
     }
     // complete Finish check if Solution is correct and finished
@@ -109,7 +166,7 @@ public class Toichika {
         //All arrows
         for(int x= 0; x<gameField.getWidth();x++){
             for(int y = 0; y < gameField.getHeight();y++ ){
-                if(cells[x][y].getArrowType() != null){
+                if(cells[x][y].getArrowType() != null && !(cells[x][y].getArrowType() == ArrowType.EMPTY)){
                     listWithArrows.add(cells[x][y]);
                     counter++;
                 }
@@ -143,11 +200,16 @@ public class Toichika {
                 System.out.println("dont contains k");
             }
         }
-        Point currentPoint = getNextPoint(null);
+
+        nextStep(gameField,0);
+        /////////////////////////////////////////////////////////////////////////////
+        ////////////////////////////////////////////////////////////////////////////
+        /*Point currentPoint = getNextPoint(null);
         int highestArea = gameField.getHighestArea();
         Cells newCell;
         while (currentPoint != null) {
-            for (int i = 0; i<highestArea; i++) {
+            System.out.println("Currentpoint != null");
+            for (int i = 0; i<listWithArrows.size(); i++) {
                 if (!blackList[currentPoint.getX()][currentPoint.getY()].contains(i)) {
                     if (gameField.setCellValueAndCheck(currentPoint.getX(), currentPoint.getY(), arrowType)) {
                         newCell = new Cells(arrowType,new Point(currentPoint.getX(),currentPoint.getY()),area);
@@ -175,7 +237,7 @@ public class Toichika {
                     break;
                 }
             }
-        }
+        }*/
         return true;
     }
     public ArrayList<Cells> getSteps() {
