@@ -8,11 +8,11 @@ public class GameField {
     public GameField(int height, int lenght) {
         cells = new Cells[lenght][height];
     }
-
+    //function to get widht of 2DCellsArray
     public int getWidth() {
         return cells.length;
     }
-
+    //function to get height of 2DCellsArray
     public int getHeight() {
         return cells[0].length;
     }
@@ -31,12 +31,14 @@ public class GameField {
             }
         }
     }*/
+    //Function to check if point is free
     public boolean isPointFree (int pX, int pY) {
         if (pX >= 0 && pY >= 0 && pY < this.getHeight() && pX < this.getWidth()) {
             return cells[pX][pY] == null || !cells[pX][pY].isFixed();
         }
         return false;
     }
+    //function to print Gamefield
     public void printGameField() {
         for (int i = 0; i < cells.length; i++) {
             for (int k = 0; k < cells[i].length; k++) {
@@ -51,11 +53,11 @@ public class GameField {
         }
         return false;
     }
-    // rdy ENDPRÜFUNG
+    // Final Checking if exact one Arrow is in each Area
     public boolean checkIfOneArrowIsInArea(int pArea) {
         return 1 == countArrowsInArea(pArea);
     }
-    // rdy ENDPRÜFUNG
+    // Final Check to Count all Arrows in one Area
     public int countArrowsInArea(int pArea) {
         int counter = 0;
         for (int i = 0; i < cells.length; i++) {
@@ -68,7 +70,7 @@ public class GameField {
         }
         return counter;
     }
-    //rdy
+    //Final Check a function to get the highest Area of the GameField
     public int getHighestArea() {
         int highest = 0;
         for (int i = 0; i < cells.length; i++) {
@@ -81,11 +83,11 @@ public class GameField {
         }
         return highest;
     }
-    //rdy
+    //for setting an Arrow in a Cell
     public void setArrowInCell(Point p, ArrowType pArrow) {
         cells[p.getX()][p.getY()].setArrowType(pArrow);
     }
-    // rdy ENDPRÜFUNG
+    // final Check function for check that two Arrows in a Row look to each other
     public boolean checkIfTwoArrowsInRowAndLookEachOther(int y) {
         Cells currentcell;
         int counter = 0;
@@ -112,7 +114,7 @@ public class GameField {
         }
         return true;
     }
-    // rdy ENDPRÜFUNG
+    // final Check function for check that two Arrows in a Coloumn look to each other
     public boolean checkIfTwoArrowsInColoumnAndLookEachOther(int x) {
         Cells currentcell;
         int counter = 0;
@@ -137,8 +139,7 @@ public class GameField {
         }
         return true;
     }
-    // rdy ENDPRÜFUNG
-    //soltle passen
+    // final Check function for check that no Arrows are between two Arrows in a Coloumn they look to each other
     public boolean checkIfNoArrowBetweenInColoumn(Point p, Point q) {
         Cells cellOne = cells[p.getX()][p.getY()];
         Cells cellTwo = cells[q.getX()][q.getY()];
@@ -156,8 +157,7 @@ public class GameField {
 
         return false;
     }
-    // rdy ENDPRÜFUNG
-    //sollte passen
+    // final Check function for check that no Arrows are between two Arrows in a Row they look to each other
     public boolean checkIfNoArrowBetweenInRow(Point p, Point q) {
         Cells cellOne = cells[p.getX()][p.getY()];
         Cells cellTwo = cells[q.getX()][q.getY()];
@@ -174,8 +174,7 @@ public class GameField {
         }
         return false;
     }
-    // rdy ENDPRÜFUNG
-    //sollte passen
+    //final Check function if another Area is between to Arrows they look each other
     public boolean checkIfOtherAreaBetweenArrows(Point p, Point q) {
         //Cells and their Areas
         Cells cellOne = cells[p.getX()][p.getY()];
@@ -224,11 +223,11 @@ public class GameField {
         }
         return false;
     }
-
+    //getting all Cells
     public Cells[][] getCells() {
         return cells;
     }
-
+    //set Cells
     public boolean setCell(int x, int y, Cells pCells) {
         if (x >= 0 && y >= 0 && y < this.getHeight() && x < this.getWidth()) {
             pCells.setLocation(x, y);
@@ -241,23 +240,23 @@ public class GameField {
         return false;
         //this.cells[x][y] = cells;
     }
-
+    //check if Border is on Left Side
     private boolean isBorderOnLeft (Point pPoint) {
         return !(pPoint.getX() - 1 >= 0);
     }
-
+    //check if Border is on Right Side
     private boolean isBorderOnRight (Point pPoint) {
         return !(pPoint.getX() + 1 < getWidth());
     }
-
+    //check if Border is on top Side
     private boolean isBorderOnTop (Point pPoint) {
         return !(pPoint.getY() - 1 >= 0);
     }
-
+    //check if Border is on down Side
     private boolean isBorderOnDown (Point pPoint) {
         return !(pPoint.getY()+1 < getHeight());
     }
-
+    //set cellvalue and check
     public boolean setCellValueAndCheck(int x, int y, int area, ArrowType atype) {
         if (x >= 0 && y >= 0 && y < this.getHeight() && x < this.getWidth()) {
             Cells prevCell = cells[x][y];
@@ -291,7 +290,7 @@ public class GameField {
         }
         return false;
     }
-
+    //for removing a Cell
     public void removeCell(int x, int y) {
     }
 }

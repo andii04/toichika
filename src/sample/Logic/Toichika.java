@@ -3,11 +3,14 @@ package sample.Logic;
 import java.util.ArrayList;
 
 public class Toichika {
+    //declarations and initialising
     private Cells[][]cells;
     private GameField gameField;
     private ArrayList[][] blackList;
     private ArrayList<Cells> listWithArrows = new ArrayList<Cells>();
+    private ArrayList<Integer> fixAreas = new ArrayList<Integer>();
     private ArrayList<Cells> steps = new ArrayList<Cells>();
+    //Constructor
     public Toichika(GameField gameField) {
         cells = gameField.getCells();
         this.gameField = gameField;
@@ -18,9 +21,7 @@ public class Toichika {
             }
         }
     }
-    public Toichika() {
-
-    }
+    //function to get a Step before
     private Point getStepBefore(Point p) {
         if (steps.size() > 0) {
             blackList[p.getX()][p.getY()].clear();
@@ -33,6 +34,7 @@ public class Toichika {
         System.out.println("Not a solution possible!");
         return null;
     }
+    //function to get the next point
     private Point getNextPoint(Point p) {
         Point nextPoint = null;
         if (p == null) {
@@ -77,7 +79,7 @@ public class Toichika {
         //Evaluation of next steps
         return null;
     }
-    // complete Finish check
+    // complete Finish check if Solution is correct and finished
     private boolean checkFinished(GameField gameField) {
         int highArea = gameField.getHighestArea();
         int gameFieldlenght = gameField.getWidth();
@@ -101,23 +103,82 @@ public class Toichika {
         return true;
     }
     public boolean solve() {
-        //All areas
+        int counter = 0;
+        //All arrows
         for(int x= 0; x<gameField.getWidth();x++){
             for(int y = 0; y < gameField.getHeight();y++ ){
                 if(cells[x][y].getArrowType() != null){
                     listWithArrows.add(cells[x][y]);
+                    counter++;
                 }
             }
         }
-        for(int i = 0; i < gameField.getHighestArea();i++){
-            Cells cells = listWithArrows.get(0);
-            ArrowType arrowType = cells.getArrowType();
+        System.out.println("Counter"+ counter);
+        //all areas for fix them from beginning setted arrows
+        System.out.println("highest Area" + gameField.getHighestArea());
+        System.out.println(listWithArrows.size());
+        for(int i = 0; i < listWithArrows.size();i++){
+            System.out.println("i:    "+i);
+            Cells cells = listWithArrows.get(i);
             int area = cells.getArea();
+            ArrowType arrowType = cells.getArrowType();
+            if(arrowType.equals(ArrowType.UP) || arrowType.equals(ArrowType.RIGHT) || arrowType.equals(ArrowType.DOWN) || arrowType.equals(ArrowType.LEFT)){
+                if(!(fixAreas.contains(area))){
+                    fixAreas.add(area);
+                    System.out.println("Area:   "+ area);
+                }
+            }
+            else{
+                System.out.println("EMPTY Pfeil");
+            }
         }
-        System.out.println(listWithArrows.toString());
-        //Test
+        System.out.println(fixAreas.toString()+"  fixe Areas");
+        System.out.println("listwitharrows:      "+ listWithArrows.toString());
+        for(int k = 0;k<= gameField.getHighestArea();k++){
+            if(fixAreas.contains(k)){
+                System.out.println("contains  "+k);
+            }else{
+                System.out.println("dont contains k");
+            }
+        }
 
         return true;
+        //Test
+        /*Point currentPoint = getNextPoint(null);
+        int highestArea = gameField.getHighestArea();
+        Cells newCell;
+        while (currentPoint != null) {
+            for (int i = highestArea; i>= 2; i--) {
+                if (!blackList[currentPoint.getX()][currentPoint.getY()].contains(i)) {
+                    if (gameField.setCellValueAndCheck(currentPoint.getX(), currentPoint.getY(), i)) {
+                        newCell = new Cells(i);
+                        newCell.setLocation(currentPoint.getX(), currentPoint.getY());
+                        steps.add(newCell);
+                        currentPoint = getNextPoint(currentPoint);
+                        break;
+                    }
+                    else if (2 == i) {
+                        currentPoint = getStepBefore(currentPoint);
+                        if (currentPoint == null) {
+                            return false;
+                        }
+                        break;
+                    }
+                    else {
+                        blackList[currentPoint.getX()][currentPoint.getY()].add(i);
+                    }
+                }
+                else if (i == 2) {
+                    currentPoint = getStepBefore(currentPoint);
+                    if (currentPoint == null) {
+                        return false;
+                    }
+                    break;
+                }
+            }
+        }*/
+
+        //return true;
     }
     public ArrayList<Cells> getSteps() {
         return steps;

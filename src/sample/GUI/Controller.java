@@ -19,7 +19,6 @@ public class Controller {
     private Drawer drawer;
     private Toichika toichika;
     private boolean solved;
-
     Cells [][]cells;
     @FXML
     public GridPane gridPane;
@@ -30,15 +29,14 @@ public class Controller {
         String content = new String(Files.readAllBytes(file.toPath()));
         return new JSONObject(content);
     }*/
-
+    //Function to handle DragOverFile
     public void handleDragOver(DragEvent dragEvent) {
         if (dragEvent.getDragboard().hasFiles()){
             dragEvent.acceptTransferModes(TransferMode.ANY);
         }
     }
-
+    //Function for handle DragDroppedFile
     public void handleDragDropped(DragEvent dragEvent) {
-
         try{
             List<File> files = dragEvent.getDragboard().getFiles();
             FileReader fileReader = new FileReader(files.get(0));
@@ -61,18 +59,15 @@ public class Controller {
             infoText.setText("Invalid File. Try again with another JSON file" + e);
         }
     }
-
-    //JSON parsing
+    //JSON parsing function
     public GameField generateGamefield(JSONObject jsonObject){
         solved = false;
         JSONArray cells = (JSONArray) jsonObject.get("cells");
-
         int width = Integer.parseInt((String) jsonObject.get("width"));
         System.out.println(width);
         int height = Integer.parseInt((String) jsonObject.get("height"));
         System.out.println(height);
         GameField gameField= new GameField(width, height);
-
         for (Object cell : cells) {
             JSONObject jsoncell = (JSONObject) cell;
             int x = Integer.parseInt ((String) jsoncell.get("x"));
@@ -97,8 +92,8 @@ public class Controller {
             }
             gameField.setCell(x, y, new Cells(type,new Point(x,y), area));
 
-            System.out.print(x);
-            System.out.println("TEsst");
+            //System.out.print(x);
+            //System.out.println("TEsst");
         }
         return gameField;
     }
