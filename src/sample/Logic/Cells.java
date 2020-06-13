@@ -4,6 +4,7 @@ public class Cells {
     private ArrowType arrowType;
     private Point point;
     private int area;
+    private boolean fixxed;
 
     public Cells(ArrowType arrowType, Point point, int area) {
         this.arrowType = arrowType;
@@ -41,5 +42,17 @@ public class Cells {
 
     public void setPoint(Point point) {
         this.point = point;
+    }
+
+    public boolean isFixed() {
+        return fixxed;
+    }
+
+    public void setFixxed(boolean fixxed){
+        this.fixxed = fixxed;
+    }
+
+    public Object getValue() {
+        return null;
     }
 }

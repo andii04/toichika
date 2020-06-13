@@ -31,7 +31,12 @@ public class GameField {
             }
         }
     }*/
-
+    public boolean isPointFree (int pX, int pY) {
+        if (pX >= 0 && pY >= 0 && pY < this.getHeight() && pX < this.getWidth()) {
+            return cells[pX][pY] == null || !cells[pX][pY].isFixed();
+        }
+        return false;
+    }
     public void printGameField() {
         for (int i = 0; i < cells.length; i++) {
             for (int k = 0; k < cells[i].length; k++) {
@@ -40,20 +45,17 @@ public class GameField {
             System.out.println();
         }
     }
-
     public boolean checkIfCellIsNotSet(Point p) {
         if (p.getX() >= 0 && p.getY() >= 0 && p.getY() < this.getHeight() && p.getX() < this.getWidth()) {
             return cells[p.getX()][p.getY()].getArrowType() == null; //|| !cells[pX][pY].isFixed();
         }
         return false;
     }
-
-    //rdy
+    // rdy ENDPRÜFUNG
     public boolean checkIfOneArrowIsInArea(int pArea) {
         return 1 == countArrowsInArea(pArea);
     }
-
-    //rdy
+    // rdy ENDPRÜFUNG
     public int countArrowsInArea(int pArea) {
         int counter = 0;
         for (int i = 0; i < cells.length; i++) {
@@ -66,7 +68,6 @@ public class GameField {
         }
         return counter;
     }
-
     //rdy
     public int getHighestArea() {
         int highest = 0;
@@ -80,12 +81,11 @@ public class GameField {
         }
         return highest;
     }
-
     //rdy
     public void setArrowInCell(Point p, ArrowType pArrow) {
         cells[p.getX()][p.getY()].setArrowType(pArrow);
     }
-
+    // rdy ENDPRÜFUNG
     public boolean checkIfTwoArrowsInRowAndLookEachOther(int y) {
         Cells currentcell;
         int counter = 0;
@@ -112,7 +112,7 @@ public class GameField {
         }
         return true;
     }
-
+    // rdy ENDPRÜFUNG
     public boolean checkIfTwoArrowsInColoumnAndLookEachOther(int x) {
         Cells currentcell;
         int counter = 0;
@@ -137,7 +137,7 @@ public class GameField {
         }
         return true;
     }
-
+    // rdy ENDPRÜFUNG
     //soltle passen
     public boolean checkIfNoArrowBetweenInColoumn(Point p, Point q) {
         Cells cellOne = cells[p.getX()][p.getY()];
@@ -156,7 +156,7 @@ public class GameField {
 
         return false;
     }
-
+    // rdy ENDPRÜFUNG
     //sollte passen
     public boolean checkIfNoArrowBetweenInRow(Point p, Point q) {
         Cells cellOne = cells[p.getX()][p.getY()];
@@ -174,7 +174,7 @@ public class GameField {
         }
         return false;
     }
-
+    // rdy ENDPRÜFUNG
     //sollte passen
     public boolean checkIfOtherAreaBetweenArrows(Point p, Point q) {
         //Cells and their Areas
@@ -231,5 +231,58 @@ public class GameField {
 
     public void setCell(int x, int y, Cells cells) {
         this.cells[x][y] = cells;
+    }
+
+    private boolean isBorderOnLeft (Point pPoint) {
+        return !(pPoint.getX() - 1 >= 0);
+    }
+
+    private boolean isBorderOnRight (Point pPoint) {
+        return !(pPoint.getX() + 1 < getWidth());
+    }
+
+    private boolean isBorderOnTop (Point pPoint) {
+        return !(pPoint.getY() - 1 >= 0);
+    }
+
+    private boolean isBorderOnDown (Point pPoint) {
+        return !(pPoint.getY()+1 < getHeight());
+    }
+
+    public boolean setCellValueAndCheck(int x, int y, int area, ArrowType atype) {
+        if (x >= 0 && y >= 0 && y < this.getHeight() && x < this.getWidth()) {
+            Cells prevCell = cells[x][y];
+            Cells newCell;
+            if (prevCell == null) {
+                newCell = new Cells(atype,new Point(x,y),area);
+                //newCell.setLocation(x, y);
+                cells[x][y] = newCell;
+            }
+            else {
+                newCell = new Cells(prevCell.getArrowType(),new Point(x,y), area);
+                //newCell.setLocation(x, y);
+                cells[x][y] = newCell;
+            }
+
+            /*if (!isSnakeValidOrSolvable(newCell.getLocation())) {
+                cells[x][y] = prevCell;
+                return false;
+            }*/
+            /*
+            Cell[] neighbours = getNeighbours(new Point (x, y));
+            for (int i = 0; i < neighbours.length; i++) {
+                if (neighbours[i] != null) {
+                    if (!isSnakeValidOrSolvable(neighbours[i].getLocation())) {
+                        cells[x][y] = prevCell;
+                        return false;
+                    }
+                }
+            }*/
+            return true;
+        }
+        return false;
+    }
+
+    public void removeCell(int x, int y) {
     }
 }

@@ -4,18 +4,17 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
-import org.json.JSONException;
-import org.json.JSONObject;
-import sample.Logic.GameField;
 import sample.Logic.Toichika;
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
 
 public class Main extends Application {
 
+    boolean started = false;
+    private Drawer drawer;
+    private Toichika toichika;
+    private boolean solved;
     @Override
     public void start(Stage primaryStage) throws Exception{
         Parent root = FXMLLoader.load(getClass().getResource("sample.fxml"));
@@ -27,48 +26,49 @@ public class Main extends Application {
             switch (l) {
                 case F5:
                     //stepByStepAction();
-                    System.out.println("F5");
+                    System.out.println("F5 - STEP");
+                    /*if(!solved){
+                        solved = toichika.solve();
+                    }*/
+                    //drawer.drawNextStep();
                     break;
                 case F6:
                     //completeAction();
-                    System.out.println("F6");
+                    System.out.println("F6 Solve...Solving");
+                    Alert alert = new Alert(Alert.AlertType.ERROR);
+                    alert.setContentText("no Solution possible");
+                    alert.show();
+                    /*if (!toichika.solve()) {
+                        Alert alert = new Alert(Alert.AlertType.ERROR);
+                        alert.setContentText("Not solveable!");
+                        alert.show();
+                    }
+                    drawer.drawInit();*/
                     break;
                 case F8:
-                    //closeApplication();
+                    System.out.println("Close Application");
                     System.exit(0);
                     break;
             }
         });
         primaryStage.setScene(mainScene);
         primaryStage.show();
-
-
-        GameField gf = null;
-        File file = new File("src/sample/gameField01.json");
+        /*GameField gf = null;
+        File file = new File("src/sample/gameField01_mitFehlern_12AreaFehlt.json");
         File solvedfile = new File("src/sample/gameField02_geloest.json");
         try {
             Controller con = new Controller();
-            gf = con.generateGamefield(readJSONFile(solvedfile));
-
+            //gf = con.generateGamefield(readJSONFile(solvedfile));
         }
         catch (Exception e){
-            System.out.println("fsajfoisdjfiosdjfiosdjfiosdj   "+e.getMessage());
+            System.out.println("!!! Exception:  "+e.getMessage());
         }
-
         gf.printGameField();
-
         Toichika toichika = new Toichika();
-        toichika.nextStep(gf);
+        toichika.nextStep(gf);*/
     }
-
 
     public static void main(String[] args) {
         launch(args);
-
-    }
-
-    static JSONObject readJSONFile(File file) throws JSONException, IOException {
-        String content = new String(Files.readAllBytes(file.toPath()));
-        return new JSONObject(content);
     }
 }
