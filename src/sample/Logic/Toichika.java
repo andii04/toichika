@@ -115,6 +115,7 @@ public class Toichika {
             int area = cells.getArea();
         }
         System.out.println(listWithArrows.toString());
+        //Test
 
         return true;
     }
