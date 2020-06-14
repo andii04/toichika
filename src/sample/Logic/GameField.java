@@ -288,7 +288,7 @@ public class GameField {
 
     public Cells getLeftNeighbour(Point pPoint) {
         if (!isBorderOnLeft(pPoint)) {
-            return cells[pPoint.getX()-1][pPoint.getY()];
+            return cells[pPoint.getY()][pPoint.getX()-1];
         }
 
         return null;
@@ -296,7 +296,7 @@ public class GameField {
 
     public Cells getRightNeighbour(Point pPoint) {
         if (!isBorderOnRight(pPoint)) {
-            return cells[pPoint.getX()+1][pPoint.getY()];
+            return cells[pPoint.getY()][pPoint.getX()+1];
         }
 
         return null;
@@ -304,7 +304,7 @@ public class GameField {
 
     public Cells getAboveNeighbour(Point pPoint) {
         if (!isBorderOnTop(pPoint)) {
-            return cells[pPoint.getX()][pPoint.getY() - 1];
+            return cells[pPoint.getY() - 1][pPoint.getX()];
         }
 
         return null;
@@ -312,7 +312,7 @@ public class GameField {
 
     public Cells getBelowNeighbour(Point pPoint) {
         if (!isBorderOnDown(pPoint)) {
-            return cells[pPoint.getX()][pPoint.getY() + 1];
+            return cells[pPoint.getY() + 1][pPoint.getX()];
         }
 
         return null;

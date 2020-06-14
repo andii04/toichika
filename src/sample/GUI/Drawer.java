@@ -41,10 +41,10 @@ public class Drawer {
     //function for drawing one cell
     private void drawTheCell(Point point) {
         Region tile = new Region();
-        int aboveBorder = 1;
-        int rightBorder = 1;
-        int belowBorder = 1;
-        int leftBorder = 1;
+        double aboveBorder = 1;
+        double rightBorder = 1;
+        double belowBorder = 1;
+        double leftBorder = 1;
 
         ArrowType type = ArrowType.EMPTY;
 
@@ -53,23 +53,23 @@ public class Drawer {
         if (currentCell != null) {
             type = currentCell.getArrowType();
 
-           /* Cells leftN = gameField.getLeftNeighbour(point);
+           Cells leftN = gameField.getLeftNeighbour(point);
             Cells rN = gameField.getRightNeighbour(point);
             Cells aN = gameField.getAboveNeighbour(point);
             Cells bN = gameField.getBelowNeighbour(point);
 
             if (leftN != null && leftN.getArea() == currentCell.getArea()) {
-                leftBorder = 0;
+                leftBorder = 0.2;
             }
             if (rN != null && rN.getArea() == currentCell.getArea()) {
-                rightBorder = 0;
+                rightBorder = 0.2;
             }
             if (aN != null && aN.getArea() == currentCell.getArea()) {
-                aboveBorder = 0;
+                aboveBorder = 0.2;
             }
             if (bN != null && bN.getArea() == currentCell.getArea()) {
-                belowBorder = 0;
-            }*/
+                belowBorder = 0.2;
+            }
         }
 
         String borders = aboveBorder + " " + rightBorder + " " + belowBorder + " " + leftBorder;
