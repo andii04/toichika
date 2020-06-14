@@ -1,22 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ButtonBar?>
-<?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Text?>
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.Controller">
-   <children>
-      <ButtonBar layoutX="14.0" layoutY="14.0" prefHeight="40.0" prefWidth="200.0">
-         <buttons>
-            <Button fx:id="f5" mnemonicParsing="false" text="f5" />
-            <Button fx:id="f6" mnemonicParsing="false" text="f6" />
-            <Button fx:id="f8" mnemonicParsing="false" text="f8" />
-         </buttons></ButtonBar>
-       <StackPane onDragDropped="#handleDragDropped" onDragOver="#handleDragOver">
-           <GridPane fx:id="gridPane" alignment="CENTER" focusTraversable="true"/>
-           <Text fx:id="infoText" focusTraversable="true" text="Please drop a JSON here." />
-       </StackPane>
-   </children>
-</AnchorPane>
+<StackPane onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" onKeyPressed="#handleOnKeyPressed" xmlns="http://javafx.com/javafx/8.0.172-ea" xmlns:fx="http://javafx.com/fxml/1" fx:controller="sample.GUI.Controller">
+    <GridPane fx:id="gridPane" alignment="CENTER" focusTraversable="true"/>
+    <Text fx:id="infoText" focusTraversable="true" text="drop a JSON file here." />
+</StackPane>
+

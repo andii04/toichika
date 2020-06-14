@@ -3,6 +3,8 @@ package sample.GUI;
 
 import javafx.fxml.FXML;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.GridPane;
 import javafx.scene.text.Text;
@@ -19,7 +21,7 @@ public class Controller {
     private Drawer drawer;
     private Toichika toichika;
     private boolean solved;
-    Cells [][]cells;
+    Cells[][] cells;
     @FXML
     public GridPane gridPane;
     @FXML
@@ -31,66 +33,66 @@ public class Controller {
     }*/
     //Function to handle DragOverFile
     public void handleDragOver(DragEvent dragEvent) {
-        if (dragEvent.getDragboard().hasFiles()){
+        if (dragEvent.getDragboard().hasFiles()) {
             dragEvent.acceptTransferModes(TransferMode.ANY);
         }
     }
+
     //Function for handle DragDroppedFile
     public void handleDragDropped(DragEvent dragEvent) {
-        try{
+        GameField gameField;
+        try {
             List<File> files = dragEvent.getDragboard().getFiles();
             FileReader fileReader = new FileReader(files.get(0));
             Object obj = new JSONParser().parse(fileReader);
             JSONObject jsonObject = (JSONObject) obj;
-            GameField gameField = generateGamefield(jsonObject);
+            gameField = generateGamefield(jsonObject);
             toichika = new Toichika(gameField);
             toichika.solve();
+        } catch (Exception e) {
+            infoText.setVisible(true);
+            infoText.setText("Invalid File. Try again with another JSON file" + e);
+            return;
+        }
             /*for(int x = 0; x<gameField.getWidth();x++){
                 for(int y = 0;y < gameField.getHeight();y++){
                     cells[x][y].setArrowType(jsonObject.get());
                 }
             }*/
-            //drawer = new Drawer(gridPane, gameField.getCells(), gameField, toichika.getSteps());
-            //drawer.drawInit();
-            //infoText.setVisible(false);
-        }
-        catch (Exception e){
-            infoText.setVisible(true);
-            infoText.setText("Invalid File. Try again with another JSON file" + e);
-        }
+        drawer = new Drawer(gridPane, gameField.getCells(), gameField, toichika.getSteps());
+        drawer.drawInit();
+        //infoText.setVisible(false);
+
     }
+
     //JSON parsing function
-    public GameField generateGamefield(JSONObject jsonObject){
+    public GameField generateGamefield(JSONObject jsonObject) {
         solved = false;
         JSONArray cells = (JSONArray) jsonObject.get("cells");
         int width = Integer.parseInt((String) jsonObject.get("width"));
         System.out.println(width);
         int height = Integer.parseInt((String) jsonObject.get("height"));
         System.out.println(height);
-        GameField gameField= new GameField(width, height);
+        GameField gameField = new GameField(width, height);
         for (Object cell : cells) {
             JSONObject jsoncell = (JSONObject) cell;
-            int x = Integer.parseInt ((String) jsoncell.get("x"));
-            int y = Integer.parseInt ((String) jsoncell.get("y"));
+            int x = Integer.parseInt((String) jsoncell.get("x"));
+            int y = Integer.parseInt((String) jsoncell.get("y"));
             int area = Integer.parseInt((String) (jsoncell.get("area")));
             ArrowType type;
             String sType = (String) jsoncell.get("ArrowType");
             if (sType.equals("UP")) {
                 type = ArrowType.UP;
-            }
-            else if (sType.equals("DOWN")) {
+            } else if (sType.equals("DOWN")) {
                 type = ArrowType.DOWN;
-            }
-            else if(sType.equals("RIGHT")){
+            } else if (sType.equals("RIGHT")) {
                 type = ArrowType.RIGHT;
-            }
-            else if(sType.equals("LEFT")){
+            } else if (sType.equals("LEFT")) {
                 type = ArrowType.LEFT;
-            }
-            else {
+            } else {
                 type = ArrowType.EMPTY;
             }
-            gameField.setCell(x, y, new Cells(type,new Point(x,y), area));
+            gameField.setCell(x, y, new Cells(type, new Point(x, y), area));
 
             //System.out.print(x);
             //System.out.println("TEsst");
@@ -98,4 +100,28 @@ public class Controller {
         return gameField;
     }
 
+    public void handleOnKeyPressed(KeyEvent keyEvent) {
+        if (keyEvent.getCode() == KeyCode.F5) {
+            System.out.println("Step");
+            toichika.solve();
+            /*if (!solved) {
+                solved = snakePit.solve();
+            }*/
+            drawer.drawNextStep();
+        } else if (keyEvent.getCode() == KeyCode.F6) {
+            System.out.println("Solve");
+            infoText.setText("Solving...");
+            infoText.setVisible(true);
+            /*if (!snakePit.solve()) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.setContentText("Not solveable!");
+                alert.show();
+            }*/
+            drawer.drawInit();
+            infoText.setVisible(false);
+        } else if (keyEvent.getCode() == KeyCode.F8) {
+            System.out.println("Close Application");
+            System.exit(0);
+        }
+    }
 }
