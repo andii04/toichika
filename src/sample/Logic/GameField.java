@@ -16,21 +16,6 @@ public class GameField {
     public int getHeight() {
         return cells[0].length;
     }
-    //Remove a set Cell
-    /*public void removeCell (int pX, int pY) {
-        if (pX >= 0 && pY >= 0 && pY < this.getHeight() && pX < this.getWidth()) {
-            Cells currentCell = cells[pX][pY];
-            if (currentCell != null && !currentCell.isFixed()) {
-                if (currentCell.getArrowType() == ArrowType.EMPTY) {
-                    cells[pX][pY] = null;
-                }
-                else {
-                    //cells[pX][pY] = new Cells(currentCell.getArrowType());
-                    cells[pX][pY].setLocation(pX, pY);
-                }
-            }
-        }
-    }*/
     //Function to check if point is free
     public boolean isPointFree (int pX, int pY) {
         if (pX >= 0 && pY >= 0 && pY < this.getHeight() && pX < this.getWidth()) {

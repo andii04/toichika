@@ -25,28 +25,16 @@ public class Main extends Application {
             KeyCode l = e.getCode();
             switch (l) {
                 case F5:
-                    //stepByStepAction();
                     System.out.println("F5 - STEP");
-                    /*if(!solved){
-                        solved = toichika.solve();
-                    }*/
-                    //drawer.drawNextStep();
                     break;
                 case F6:
-                    //completeAction();
                     System.out.println("F6 Solve...Solving");
                     Alert alert = new Alert(Alert.AlertType.ERROR);
-                    alert.setContentText("no Solution possible");
+                    alert.setContentText("Solution not possible");
                     alert.show();
-                    /*if (!toichika.solve()) {
-                        Alert alert = new Alert(Alert.AlertType.ERROR);
-                        alert.setContentText("Not solveable!");
-                        alert.show();
-                    }
-                    drawer.drawInit();*/
                     break;
                 case F8:
-                    System.out.println("Close Application");
+                    System.out.println("Closing App");
                     System.exit(0);
                     break;
             }

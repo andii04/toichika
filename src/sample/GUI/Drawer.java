@@ -17,9 +17,6 @@ public class Drawer {
         this.gameField = gameField;
         this.steps = steps;
     }
-    public Drawer(GridPane gridPane) {
-        this.gridPane = gridPane;
-    }
     private GridPane gridPane;
     private Cells[][] cells;
     private GameField gameField;
@@ -52,13 +49,13 @@ public class Drawer {
             if(aType == ArrowType.EMPTY){
                 stackPane = new StackPane(tile,text);
             }else if(aType == ArrowType.UP){
-                System.out.println(" UP PFeil");
+                stackPane = new StackPane(tile,text);
             }else if(aType == ArrowType.RIGHT){
-
+                stackPane = new StackPane(tile,text);
             }else if(aType == ArrowType.DOWN){
-
+                stackPane = new StackPane(tile,text);
             }else if(aType == ArrowType.LEFT){
-
+                stackPane = new StackPane(tile,text);
             }
         }
         gridPane.add(stackPane,point.getX(),point.getY());
