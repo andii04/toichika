@@ -52,6 +52,24 @@ public class Drawer {
 
         if (currentCell != null) {
             type = currentCell.getArrowType();
+
+           /* Cells leftN = gameField.getLeftNeighbour(point);
+            Cells rN = gameField.getRightNeighbour(point);
+            Cells aN = gameField.getAboveNeighbour(point);
+            Cells bN = gameField.getBelowNeighbour(point);
+
+            if (leftN != null && leftN.getArea() == currentCell.getArea()) {
+                leftBorder = 0;
+            }
+            if (rN != null && rN.getArea() == currentCell.getArea()) {
+                rightBorder = 0;
+            }
+            if (aN != null && aN.getArea() == currentCell.getArea()) {
+                aboveBorder = 0;
+            }
+            if (bN != null && bN.getArea() == currentCell.getArea()) {
+                belowBorder = 0;
+            }*/
         }
 
         String borders = aboveBorder + " " + rightBorder + " " + belowBorder + " " + leftBorder;
@@ -61,13 +79,13 @@ public class Drawer {
         Text text;
 
         if (type == ArrowType.DOWN) {
-            text = new Text("D");
+            text = new Text("↓");
         } else if (type == ArrowType.UP) {
-            text = new Text("U");
+            text = new Text("↑");
         } else if (type == ArrowType.LEFT) {
-            text = new Text("L");
+            text = new Text("←");
         } else if (type == ArrowType.RIGHT) {
-            text = new Text("R");
+            text = new Text("→");
         } else {
             text = new Text(" ");
         }

@@ -285,4 +285,45 @@ public class GameField {
     //for removing a Cell
     public void removeCell(int x, int y) {
     }
+
+    public Cells getLeftNeighbour(Point pPoint) {
+        if (!isBorderOnLeft(pPoint)) {
+            return cells[pPoint.getX()-1][pPoint.getY()];
+        }
+
+        return null;
+    }
+
+    public Cells getRightNeighbour(Point pPoint) {
+        if (!isBorderOnRight(pPoint)) {
+            return cells[pPoint.getX()+1][pPoint.getY()];
+        }
+
+        return null;
+    }
+
+    public Cells getAboveNeighbour(Point pPoint) {
+        if (!isBorderOnTop(pPoint)) {
+            return cells[pPoint.getX()][pPoint.getY() - 1];
+        }
+
+        return null;
+    }
+
+    public Cells getBelowNeighbour(Point pPoint) {
+        if (!isBorderOnDown(pPoint)) {
+            return cells[pPoint.getX()][pPoint.getY() + 1];
+        }
+
+        return null;
+    }
+
+    public Cells[] getNeighbours(Point pPoint) {
+        Cells[] neighbours = new Cells[4];
+        neighbours[0] = getLeftNeighbour(pPoint);
+        neighbours[1] = getRightNeighbour(pPoint);
+        neighbours[2] = getAboveNeighbour(pPoint);
+        neighbours[3] = getBelowNeighbour(pPoint);
+        return neighbours;
+    }
 }
