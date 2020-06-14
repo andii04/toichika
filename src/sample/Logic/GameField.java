@@ -16,7 +16,7 @@ public class GameField {
     public int getHeight() {
         return cells[0].length;
     }
-    //TODO: Removing a Set Cell
+    //Remove a set Cell
     /*public void removeCell (int pX, int pY) {
         if (pX >= 0 && pY >= 0 && pY < this.getHeight() && pX < this.getWidth()) {
             Cells currentCell = cells[pX][pY];
@@ -198,7 +198,6 @@ public class GameField {
                     }
                 }
             }
-            //evtl unnötig
             else if (areaFromCellOne != areaFromCellTwo && cellTwo.getPoint().getX() < cellOne.getPoint().getX()) {
                 for (int xsecondStartCell = cellTwo.getPoint().getX(); xsecondStartCell < cellOne.getPoint().getX(); xsecondStartCell++) {
                         int area = startCell[xsecondStartCell][p.getY()].getArea();
@@ -208,7 +207,7 @@ public class GameField {
                 }
             }
         }
-        //same Coloumn Cells // nochmal überarbeiten
+        //same Coloumn Cells
         else if (areaFromCellOne != areaFromCellTwo && cellTwo.getPoint().getY() < cellOne.getPoint().getY()) {
             for (int xsecondStartCell = cellTwo.getPoint().getX(); xsecondStartCell < cellOne.getPoint().getX(); xsecondStartCell++) {
                     int area = startCell[xsecondStartCell][p.getY()].getArea();
